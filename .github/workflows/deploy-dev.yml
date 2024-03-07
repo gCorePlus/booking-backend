@@ -1,0 +1,29 @@
+name: deploy-dev
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    uses: ./.github/workflows/_backend-build.yml
+    with:
+      ARTIFACT_NAME: dev-build
+
+  deploy-api:
+    uses: ./.github/workflows/_backend-deploy.yml
+    needs: [ build ]
+    with:
+      ARTIFACT_NAME: dev-build
+      FUNC_NAME: bkg-dev-booking-api
+      FUNC_SOURCE_DIR: dist
+      PACKAGE_PREPARE_CMD: |
+        yarn --production
+
+        cp tsconfig.json dist/tsconfig.json
+        cp package.json dist/package.json
+        sed -i 's/$MAIN/apps\/app\/apps\/app\/src\/main.google.js/g' dist/package.json
+    secrets:
+      GCP_SERVICE_ACCOUNT: ${{ secrets.DEV_GCP_SERVICE_ACCOUNT }}
+      GCP_FUNCTION_VARIABLES: ${{ secrets.DEV_GCP_FUNC_BOOKING_VARIABLES }}

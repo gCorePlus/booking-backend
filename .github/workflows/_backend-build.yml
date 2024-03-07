@@ -1,0 +1,39 @@
+name: _backend-build
+on:
+  workflow_call:
+    inputs:
+      ARTIFACT_NAME:
+        type: string
+        required: false
+      BUILD_CMD:
+        default: |
+          yarn
+          yarn build
+          yarn test
+        type: string
+        required: false
+    secrets:
+      NPMRC:
+        required: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'yarn'
+      - name: Build
+        shell: bash
+        run: ${{inputs.BUILD_CMD}}
+      - uses: actions/upload-artifact@v4
+        env:
+          HAS_ARTIFACT_NAME: ${{inputs.ARTIFACT_NAME != ''}}
+        if: ${{ env.HAS_ARTIFACT_NAME == 'true' }}
+        with:
+          name: ${{inputs.ARTIFACT_NAME}}
+          overwrite: true
+          path: |
+            .
+            !node_modules/

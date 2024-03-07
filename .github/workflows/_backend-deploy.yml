@@ -1,0 +1,73 @@
+name: _backend-deploy
+on:
+  workflow_call:
+    inputs:
+      ARTIFACT_NAME:
+        type: string
+        required: true
+      PACKAGE_PREPARE_CMD:
+        type: string
+        required: false
+      FUNC_NAME:
+        type: string
+        required: true
+      FUNC_RUNTIME:
+        type: string
+        required: false
+        default: 'nodejs20'
+      FUNC_ENTRYPOINT:
+        type: string
+        required: false
+        default: 'api'
+      FUNC_REGION:
+        type: string
+        required: false
+        default: 'us-central1'
+      FUNC_SOURCE_DIR:
+        type: string
+        required: false
+    secrets:
+      GCP_SERVICE_ACCOUNT:
+        required: true
+      GCP_FUNCTION_VARIABLES:
+          required: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      HAS_AZURE_PUBLISH_PROFILE: ${{ secrets.AZURE_PUBLISH_PROFILE != '' }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: .
+          merge-multiple: true
+
+      - name: Package prepare
+        shell: bash
+        env:
+          HAS_PACKAGE_PREPARE_CMD: ${{ inputs.PACKAGE_PREPARE_CMD != '' }}
+        if: ${{ env.HAS_PACKAGE_PREPARE_CMD == 'true' }}
+        run: ${{inputs.PACKAGE_PREPARE_CMD}}
+
+      - name: Setup function variables
+        env:
+          HAS_GCP_FUNCTION_VARIABLES: ${{ secrets.GCP_FUNCTION_VARIABLES != '' }}
+          GCP_FUNCTION_VARIABLES: ${{ secrets.GCP_FUNCTION_VARIABLES }}
+        if: ${{ env.HAS_GCP_FUNCTION_VARIABLES == 'true' }}
+        run: |
+          echo "$GCP_FUNCTION_VARIABLES" >> ./.env.yml
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+
+      - name: Function Deploy
+        uses: google-github-actions/deploy-cloud-functions@v2
+        with:
+          name: ${{ inputs.FUNC_NAME }}
+          runtime: ${{ inputs.FUNC_RUNTIME }}
+          entry_point: ${{ inputs.FUNC_ENTRYPOINT }}
+          region: ${{ inputs.FUNC_REGION }}
+          source_dir: ${{ inputs.FUNC_SOURCE_DIR }}
+          env_vars_file: ./.env.yml
