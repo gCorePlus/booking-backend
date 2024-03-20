@@ -1,9 +1,10 @@
+import { Environment, EnvironmentModule } from '@app/environment';
 import { Module } from '@nestjs/common';
+import { IncomingMessage } from 'http';
+import { LoggerModule } from 'nestjs-pino';
+import { BookingDBModule } from './booking-db.module';
 import { BookingController } from './controllers';
 import { BookingService } from './services';
-import { LoggerModule } from 'nestjs-pino';
-import { Environment, EnvironmentModule } from '@app/environment';
-import { IncomingMessage } from 'http';
 
 @Module({
   controllers: [BookingController],
@@ -17,7 +18,7 @@ import { IncomingMessage } from 'http';
         pinoHttp: {
           level: environment.LOG_LEVEL,
           autoLogging: {
-            ignore: (req: IncomingMessage) => ['/health', '/favicon.ico'].includes(req.url),
+            ignore: (req: IncomingMessage) => environment.LOG_IGNORE.includes(req.url),
           },
           redact: {
             paths: environment.LOG_REDACT,
@@ -32,6 +33,9 @@ import { IncomingMessage } from 'http';
         },
       })),
     }),
+
+    // Database
+    BookingDBModule,
   ],
 })
 export class BookingModule {
