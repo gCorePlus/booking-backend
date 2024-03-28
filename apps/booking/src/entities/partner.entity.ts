@@ -1,22 +1,22 @@
 import { OperationTypeBaseEntity } from '@app/common/entities';
 import { BeforeInsert, Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToOne } from 'typeorm';
 import { v4 } from 'uuid';
-import { CompanyEntity } from './company.entity';
-import { LoginEntity } from './login.entity';
+import { Company } from './company.entity';
+import { Login } from './login.entity';
 
 @Entity('Partner')
-export class PartnerEntity extends OperationTypeBaseEntity {
+export class Partner extends OperationTypeBaseEntity {
 
   @Column({ name: 'Id', type: 'uuid', primary: true })
   id: string;
 
-  @OneToOne(() => LoginEntity, (entity) => entity.partner)
+  @OneToOne(() => Login, (entity) => entity.partner)
   @JoinColumn({ name: 'IdLogin' })
-  login: LoginEntity;
+  login: Login;
 
-  @ManyToMany(() => CompanyEntity, (entity) => entity.owners)
+  @ManyToMany(() => Company, (entity) => entity.owners)
   @JoinTable({ name: 'PartnerCompany', joinColumn: { name: 'IdPartner' }, inverseJoinColumn: { name: 'IdCompany' } })
-  companies: CompanyEntity[];
+  companies: Company[];
 
   constructor(init?: any) {
     super(init);

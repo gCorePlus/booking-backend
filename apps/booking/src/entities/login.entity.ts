@@ -1,12 +1,12 @@
 import { OperationTypeBaseEntity } from '@app/common/entities';
-import { BeforeInsert, Column, Entity, ManyToOne, OneToOne } from 'typeorm';
+import { BeforeInsert, Column, Entity, ManyToOne, OneToMany, OneToOne } from 'typeorm';
 import { v4 } from 'uuid';
-import { EmployeeEntity } from './employee.entity';
-import { PartnerEntity } from './partner.entity';
-import { UserEntity } from './user.entity';
+import { Employee } from './employee.entity';
+import { Partner } from './partner.entity';
+import { User } from './user.entity';
 
 @Entity('Login')
-export class LoginEntity extends OperationTypeBaseEntity {
+export class Login extends OperationTypeBaseEntity {
 
   @Column({ name: 'Id', type: 'uuid', primary: true })
   id: string;
@@ -17,14 +17,14 @@ export class LoginEntity extends OperationTypeBaseEntity {
   @Column({ name: 'Email', type: 'text' })
   email: string;
 
-  @OneToOne(() => PartnerEntity, (entity) => entity.login)
-  partner: PartnerEntity;
+  @OneToOne(() => Partner, (entity) => entity.login)
+  partner: Partner;
 
-  @OneToOne(() => UserEntity, (entity) => entity.login)
-  user: UserEntity;
+  @OneToOne(() => User, (entity) => entity.login)
+  user: User;
 
-  @ManyToOne(() => EmployeeEntity, (entity) => entity.login)
-  employees: EmployeeEntity;
+  @OneToMany(() => Employee, (entity) => entity.login)
+  employees: Employee[];
 
   constructor(init?: any) {
     super(init);

@@ -4,5 +4,6 @@ export class Environment {
   LOG_REDACT: string[];
   LOG_IGNORE: string[];
 
-  POSTGRESQL_URL: string;
+  POSTGRESQL_BOOKING_URL: string;
+  POSTGRESQL_BOOKING_SCHEMA: string;
 }

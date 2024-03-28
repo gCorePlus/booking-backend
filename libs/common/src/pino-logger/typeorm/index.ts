@@ -1,1 +1,1 @@
-export * from './pino-loggger';
+export * from './pino-typeorm.logger';

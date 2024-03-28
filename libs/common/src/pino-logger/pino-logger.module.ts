@@ -1,7 +1,7 @@
 import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { PinoLoggerLevelMiddleware } from './middlewares';
 
-@Module()
+@Module({})
 export class PinoLoggerModule implements NestModule {
 
   configure(consumer: MiddlewareConsumer) {
@@ -10,5 +10,5 @@ export class PinoLoggerModule implements NestModule {
       .forRoutes({ path: '*', method: RequestMethod.ALL })
     ;
   }
-  
+
 }

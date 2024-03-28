@@ -1,17 +1,20 @@
+import { POSTGRESQL_BOOKING_CONNECTION } from '@app/environment';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { join } from 'path';
 import datasource from './booking-db.datasource';
-import { BOOKING_CONNECTION } from './booking.contants';
 import {
-  BusinessTypeEntity,
-  CompanyEntity,
-  EmployeeEntity,
-  LoginEntity,
-  PartnerEntity,
-  ScheduleEntity,
-  ServiceEntity,
-  UserEntity,
+  BusinessType,
+  Company,
+  Employee,
+  Login,
+  Partner,
+  Schedule,
+  Service,
+  User,
 } from './entities';
+import { CompanyContact } from './entities/company-contact.entity';
+import { ContactType } from './entities/contact-type.entity';
 
 @Module({
   imports: [
@@ -20,21 +23,24 @@ import {
       autoLoadEntities: true,
       cache: {
         type: 'database',
-        tableName: 'QueryResultCache'
+        tableName: 'QueryResultCache',
       }
     }),
 
-    TypeOrmModule.forFeature([BusinessTypeEntity], BOOKING_CONNECTION),
-    TypeOrmModule.forFeature([CompanyEntity], BOOKING_CONNECTION),
-    TypeOrmModule.forFeature([EmployeeEntity], BOOKING_CONNECTION),
-    TypeOrmModule.forFeature([LoginEntity], BOOKING_CONNECTION),
-    TypeOrmModule.forFeature([PartnerEntity], BOOKING_CONNECTION),
-    TypeOrmModule.forFeature([ScheduleEntity], BOOKING_CONNECTION),
-    TypeOrmModule.forFeature([ServiceEntity], BOOKING_CONNECTION),
-    TypeOrmModule.forFeature([UserEntity], BOOKING_CONNECTION),
+    TypeOrmModule.forFeature([BusinessType], POSTGRESQL_BOOKING_CONNECTION),
+    TypeOrmModule.forFeature([Company], POSTGRESQL_BOOKING_CONNECTION),
+    TypeOrmModule.forFeature([CompanyContact], POSTGRESQL_BOOKING_CONNECTION),
+    TypeOrmModule.forFeature([ContactType], POSTGRESQL_BOOKING_CONNECTION),
+    TypeOrmModule.forFeature([Employee], POSTGRESQL_BOOKING_CONNECTION),
+    TypeOrmModule.forFeature([Login], POSTGRESQL_BOOKING_CONNECTION),
+    TypeOrmModule.forFeature([Partner], POSTGRESQL_BOOKING_CONNECTION),
+    TypeOrmModule.forFeature([Schedule], POSTGRESQL_BOOKING_CONNECTION),
+    TypeOrmModule.forFeature([Service], POSTGRESQL_BOOKING_CONNECTION),
+    TypeOrmModule.forFeature([User], POSTGRESQL_BOOKING_CONNECTION),
   ],
   exports: [
-    TypeOrmModule
-  ]
+    TypeOrmModule,
+  ],
 })
-export class BookingDBModule {}
+export class BookingDBModule {
+}

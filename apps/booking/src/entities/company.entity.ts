@@ -1,14 +1,15 @@
 import { OperationTypeBaseEntity } from '@app/common/entities';
 import { BeforeInsert, Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany } from 'typeorm';
 import { v4 } from 'uuid';
-import { BusinessTypeEntity } from './business-type.entity';
-import { EmployeeEntity } from './employee.entity';
-import { LoginEntity } from './login.entity';
-import { PartnerEntity } from './partner.entity';
-import { ServiceEntity } from './service.entity';
+import { BusinessType } from './business-type.entity';
+import { CompanyContact } from './company-contact.entity';
+import { Employee } from './employee.entity';
+import { Login } from './login.entity';
+import { Partner } from './partner.entity';
+import { Service } from './service.entity';
 
 @Entity('Company')
-export class CompanyEntity extends OperationTypeBaseEntity {
+export class Company extends OperationTypeBaseEntity {
 
   @Column({ name: 'Id', type: 'uuid', primary: true })
   id: string;
@@ -16,18 +17,21 @@ export class CompanyEntity extends OperationTypeBaseEntity {
   @Column({ name: 'Name', type: 'text' })
   name: string;
 
-  @ManyToOne(() => LoginEntity, (entity) => entity.user)
+  @ManyToOne(() => Login, (entity) => entity.user)
   @JoinColumn({ name: 'IdBusinessType' })
-  businessType: BusinessTypeEntity;
+  businessType: BusinessType;
 
-  @OneToMany(() => ServiceEntity, (entity) => entity.company)
-  services: ServiceEntity;
+  @OneToMany(() => Service, (entity) => entity.company)
+  services: Service;
 
-  @OneToMany(() => EmployeeEntity, (entity) => entity.company)
-  employees: EmployeeEntity;
+  @OneToMany(() => Employee, (entity) => entity.company)
+  employees: Employee;
 
-  @ManyToMany(() => PartnerEntity, (entity) => entity.companies)
-  owners: PartnerEntity[];
+  @OneToMany(() => CompanyContact, (entity) => entity.company)
+  contacts: CompanyContact[];
+
+  @ManyToMany(() => Partner, (entity) => entity.companies)
+  owners: Partner[];
 
   constructor(init?: any) {
     super(init);

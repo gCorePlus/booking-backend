@@ -2,26 +2,22 @@ import { OperationTypeBaseEntity } from '@app/common/entities';
 import { BeforeInsert, Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 import { v4 } from 'uuid';
 import { Company } from './company.entity';
+import { ContactType } from './contact-type.entity';
 
-@Entity('Service')
-export class Service extends OperationTypeBaseEntity {
+@Entity('CompanyContact')
+export class CompanyContact extends OperationTypeBaseEntity {
 
   @Column({ name: 'Id', type: 'uuid', primary: true })
   id: string;
 
-  @Column({ name: 'Title', type: 'text' })
-  title: string;
+  @Column({ name: 'Value', type: 'text' })
+  value: string;
 
-  @Column({ name: 'Description', type: 'text' })
-  description: string;
+  @ManyToOne(() => ContactType, (entity) => entity.companyContacts)
+  @JoinColumn({ name: 'IdContactType' })
+  contactType: ContactType;
 
-  @Column({ name: 'Time', type: 'text' })
-  time: string;
-
-  @Column({ name: 'Cost', type: 'numeric' })
-  cost: string;
-
-  @ManyToOne(() => Company, (entity) => entity.services)
+  @ManyToOne(() => Company, (entity) => entity.contacts)
   @JoinColumn({ name: 'IdCompany' })
   company: Company;
 

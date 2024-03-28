@@ -1,11 +1,11 @@
 import { OperationTypeBaseEntity } from '@app/common/entities';
 import { BeforeInsert, Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 import { v4 } from 'uuid';
-import { EmployeeEntity } from './employee.entity';
-import { UserEntity } from './user.entity';
+import { Employee } from './employee.entity';
+import { User } from './user.entity';
 
 @Entity('Schedule')
-export class ScheduleEntity extends OperationTypeBaseEntity {
+export class Schedule extends OperationTypeBaseEntity {
 
   @Column({ name: 'Id', type: 'uuid', primary: true })
   id: string;
@@ -16,13 +16,13 @@ export class ScheduleEntity extends OperationTypeBaseEntity {
   @Column({ name: 'End', type: 'timestamp' })
   end: string;
 
-  @ManyToOne(() => UserEntity, (entity) => entity.schedules)
+  @ManyToOne(() => User, (entity) => entity.schedules)
   @JoinColumn({ name: 'IdLogin' })
-  user: UserEntity;
+  user: User;
 
-  @ManyToOne(() => EmployeeEntity, (entity) => entity.schedules)
+  @ManyToOne(() => Employee, (entity) => entity.schedules)
   @JoinColumn({ name: 'IdEmployee' })
-  employee: EmployeeEntity;
+  employee: Employee;
 
   constructor(init?: any) {
     super(init);

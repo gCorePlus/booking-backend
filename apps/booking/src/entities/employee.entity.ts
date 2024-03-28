@@ -1,12 +1,12 @@
 import { OperationTypeBaseEntity } from '@app/common/entities';
 import { BeforeInsert, Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import { v4 } from 'uuid';
-import { CompanyEntity } from './company.entity';
-import { LoginEntity } from './login.entity';
-import { ScheduleEntity } from './schedule.entity';
+import { Company } from './company.entity';
+import { Login } from './login.entity';
+import { Schedule } from './schedule.entity';
 
 @Entity('Employee')
-export class EmployeeEntity extends OperationTypeBaseEntity {
+export class Employee extends OperationTypeBaseEntity {
 
   @Column({ name: 'Id', type: 'uuid', primary: true })
   id: string;
@@ -14,16 +14,16 @@ export class EmployeeEntity extends OperationTypeBaseEntity {
   @Column({ name: 'Name', type: 'text' })
   name: string;
 
-  @ManyToOne(() => LoginEntity, (entity) => entity.employees)
+  @ManyToOne(() => Login, (entity) => entity.employees)
   @JoinColumn({ name: 'IdLogin' })
-  login: LoginEntity;
+  login: Login;
 
-  @ManyToOne(() => CompanyEntity, (entity) => entity.employees)
+  @ManyToOne(() => Company, (entity) => entity.employees)
   @JoinColumn({ name: 'IdCompany' })
-  company: CompanyEntity;
+  company: Company;
 
-  @OneToMany(() => ScheduleEntity, (entity) => entity.employee)
-  schedules: ScheduleEntity;
+  @OneToMany(() => Schedule, (entity) => entity.employee)
+  schedules: Schedule[];
 
   constructor(init?: any) {
     super(init);

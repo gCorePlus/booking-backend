@@ -1,30 +1,31 @@
 import { Logger, QueryRunner } from 'typeorm';
-import { Logger as NestLogger } from '@nestjs/common'
+import { Logger as NestLogger } from '@nestjs/common';
 
-export class PinoTypeOrmLogger implements Logger {
+export class PinoTypeORMLogger implements Logger {
 
-  private readonly logger = new NestLogger(PinoTypeOrmLogger.name);
+  private readonly logger = new NestLogger(PinoTypeORMLogger.name);
 
-  constructor() {}
+  constructor() {
+  }
 
   logQuery(query: string, parameters?: Array<any>, _queryRunner?: QueryRunner) {
     this.logger.debug(
       { query: normalizeQuery(query), parameters },
-      "sql query"
+      'sql query',
     );
   }
 
   logQueryError(error: string, query: string, parameters?: Array<any>, _queryRunner?: QueryRunner) {
     this.logger.error(
       { query: normalizeQuery(query), parameters, error },
-      "failed sql query"
+      'failed sql query',
     );
   }
 
   logQuerySlow(time: number, query: string, parameters?: Array<any>, _queryRunner?: QueryRunner) {
     this.logger.warn(
       { query: normalizeQuery(query), parameters, time },
-      "slow sql query"
+      'slow sql query',
     );
   }
 
@@ -36,13 +37,13 @@ export class PinoTypeOrmLogger implements Logger {
     this.logger.debug(message);
   }
 
-  log(level: "log" | "info" | "warn", message: any, _queryRunner?: QueryRunner) {
+  log(level: 'log' | 'info' | 'warn', message: any, _queryRunner?: QueryRunner) {
     switch (level) {
-      case "log":
-      case "info":
+      case 'log':
+      case 'info':
         this.logger.log(message);
         break;
-      case "warn":
+      case 'warn':
         this.logger.warn(message);
         break;
     }
@@ -50,5 +51,5 @@ export class PinoTypeOrmLogger implements Logger {
 }
 
 function normalizeQuery(query: string) {
-  return query.replace(/\s\s+/g, " ").trim();
+  return query.replace(/\s\s+/g, ' ').trim();
 }

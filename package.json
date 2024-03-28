@@ -21,8 +21,11 @@
     "test:e2e": "jest --config ./apps/app/test/jest-e2e.json",
     "migration:create": "yarn migration-booking-typeorm:cli -- migration:create",
     "migration-booking-typeorm:cli": "ts-node -r tsconfig-paths/register -r dotenv/config ./node_modules/typeorm/cli.js -d apps/booking/src/booking-db.datasource.ts",
-    "migration-booking-migration:revert": "yarn migration-booking-typeorm:cli -- migration:revert",
-    "migration-booking-migration:run": "yarn migration-booking-typeorm:cli -- migration:run"
+    "migration-booking:run": "yarn migration-booking-typeorm:cli -- migration:run",
+    "migration-booking:revert": "yarn migration-booking-typeorm:cli -- migration:revert",
+    "migration-booking-typeorm-seed:cli": "ts-node -r tsconfig-paths/register -r dotenv/config ./node_modules/typeorm-seeding/dist/cli.js -r apps/booking/src/ -n booking-db.ormconfig.ts",
+    "migration-booking:seed:config": "yarn migration-booking-typeorm-seed:cli -- config",
+    "migration-booking:seed:run": "yarn migration-booking-typeorm-seed:cli -- seed"
   },
   "dependencies": {
     "@gcoreplus/axios-logger": "^2.0.0",
@@ -35,7 +38,10 @@
     "@nestjsx/crud": "^5.0.0-alpha.3",
     "@nestjsx/crud-typeorm": "^5.0.0-alpha.3",
     "axios": "^1.6.8",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
     "dotenv": "^16.4.5",
+    "jwt-decode": "^4.0.0",
     "nestjs-pino": "^4.0.0",
     "pg": "^8.11.3",
     "pino-http": "^9.0.0",
@@ -44,6 +50,7 @@
     "source-map-support": "^0.5.21",
     "swagger-ui-express": "^5.0.0",
     "typeorm": "^0.3.20",
+    "typeorm-seeding": "^1.6.1",
     "uuid": "^9.0.1"
   },
   "devDependencies": {

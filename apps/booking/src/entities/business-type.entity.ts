@@ -1,10 +1,10 @@
 import { OperationTypeBaseEntity } from '@app/common/entities';
 import { BeforeInsert, Column, Entity, JoinColumn, OneToMany } from 'typeorm';
 import { v4 } from 'uuid';
-import { CompanyEntity } from './company.entity';
+import { Company } from './company.entity';
 
 @Entity('BusinessType')
-export class BusinessTypeEntity extends OperationTypeBaseEntity {
+export class BusinessType extends OperationTypeBaseEntity {
 
   @Column({ name: 'Id', type: 'uuid', primary: true })
   id: string;
@@ -12,9 +12,9 @@ export class BusinessTypeEntity extends OperationTypeBaseEntity {
   @Column({ name: 'Name', type: 'text' })
   name: string;
 
-  @OneToMany(() => CompanyEntity, (entity) => entity.businessType)
+  @OneToMany(() => Company, (entity) => entity.businessType)
   @JoinColumn({ name: 'IdCompany' })
-  companies: CompanyEntity;
+  companies: Company;
 
   constructor(init?: any) {
     super(init);
