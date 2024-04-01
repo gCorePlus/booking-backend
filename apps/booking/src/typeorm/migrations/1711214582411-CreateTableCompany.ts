@@ -9,6 +9,7 @@ export class CreateTableCompany1711214582411 implements MigrationInterface {
       name: 'Company',
       columns: [
         { name: 'Id', isPrimary: true, type: MigrationUtils.getId(qr), primaryKeyConstraintName: 'PK_Company_Id' },
+        { name: 'Name', type: MigrationUtils.getString(qr), precision: 255, isNullable: false },
         { name: 'IdBusinessType', type: MigrationUtils.getId(qr), isNullable: false },
         // Default Columns
         ...COMMON_DATE_COLUMNS

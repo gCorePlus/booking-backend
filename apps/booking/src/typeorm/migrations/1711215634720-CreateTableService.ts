@@ -16,7 +16,7 @@ export class CreateTableService1711215634720 implements MigrationInterface {
         { name: 'Title', type: MigrationUtils.getString(qr), precision: 255, isNullable: false },
         { name: 'Description', type: MigrationUtils.getString(qr), precision: 255, isNullable: false },
         { name: 'Time', type: MigrationUtils.getSmallInteger(qr), isNullable: false },
-        { name: 'Cost', type: MigrationUtils.getCurrency(qr), isNullable: false },
+        { name: 'Price', type: MigrationUtils.getCurrency(qr), isNullable: false },
         // Default Columns
         ...COMMON_DATE_COLUMNS
       ],

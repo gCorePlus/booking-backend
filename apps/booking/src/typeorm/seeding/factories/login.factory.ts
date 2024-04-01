@@ -1,16 +1,15 @@
-import Faker from 'faker';
-import { define } from 'typeorm-seeding';
+import { setSeederFactory } from 'typeorm-extension';
 import { Login } from '../../../entities';
 
-define(Login, (faker: typeof Faker) => {
+export default setSeederFactory(Login, (faker, meta) => {
   const entity = new Login();
 
-  const genderFlag = faker.random.number({ min: 0, max: 1 });
-  const gender: 'male' | 'female' = genderFlag ? 'male' : 'female';
+  const sex = faker.person.sexType();
 
-  entity.id = faker.random.uuid();
-  entity.name = `${faker.name.firstName(gender)} ${faker.name.lastName(gender)}`;
-  entity.email = faker.internet.email(entity.name);
+  entity.id = faker.string.uuid();
+  entity.firstName = faker.person.firstName(sex);
+  entity.lastName = faker.person.lastName(sex);
+  entity.email = faker.internet.email({ firstName: entity.firstName, lastName: entity.lastName });
 
   return entity;
 });

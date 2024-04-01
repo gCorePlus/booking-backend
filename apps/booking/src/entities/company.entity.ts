@@ -27,7 +27,7 @@ export class Company extends OperationTypeBaseEntity {
   @OneToMany(() => Employee, (entity) => entity.company)
   employees: Employee;
 
-  @OneToMany(() => CompanyContact, (entity) => entity.company)
+  @OneToMany(() => CompanyContact, (entity) => entity.company, { cascade: true })
   contacts: CompanyContact[];
 
   @ManyToMany(() => Partner, (entity) => entity.companies)

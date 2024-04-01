@@ -1,11 +1,12 @@
 import { POSTGRESQL_BOOKING_CONNECTION } from '@app/environment';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { join } from 'path';
 import datasource from './booking-db.datasource';
 import {
   BusinessType,
   Company,
+  CompanyContact,
+  ContactType,
   Employee,
   Login,
   Partner,
@@ -13,8 +14,6 @@ import {
   Service,
   User,
 } from './entities';
-import { CompanyContact } from './entities/company-contact.entity';
-import { ContactType } from './entities/contact-type.entity';
 
 @Module({
   imports: [

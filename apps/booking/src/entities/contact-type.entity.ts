@@ -12,8 +12,8 @@ export class ContactType extends OperationTypeBaseEntity {
   @Column({ name: 'Name', type: 'text' })
   name: string;
 
-  @Column({ name: 'Title', type: 'text' })
-  title: string;
+  @Column({ name: 'Label', type: 'text' })
+  label: string;
 
   @OneToMany(() => CompanyContact, (entity) => entity.contactType)
   companyContacts: CompanyContact[];

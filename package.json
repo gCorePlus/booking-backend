@@ -19,13 +19,15 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./apps/app/test/jest-e2e.json",
-    "migration:create": "yarn migration-booking-typeorm:cli -- migration:create",
-    "migration-booking-typeorm:cli": "ts-node -r tsconfig-paths/register -r dotenv/config ./node_modules/typeorm/cli.js -d apps/booking/src/booking-db.datasource.ts",
-    "migration-booking:run": "yarn migration-booking-typeorm:cli -- migration:run",
-    "migration-booking:revert": "yarn migration-booking-typeorm:cli -- migration:revert",
-    "migration-booking-typeorm-seed:cli": "ts-node -r tsconfig-paths/register -r dotenv/config ./node_modules/typeorm-seeding/dist/cli.js -r apps/booking/src/ -n booking-db.ormconfig.ts",
-    "migration-booking:seed:config": "yarn migration-booking-typeorm-seed:cli -- config",
-    "migration-booking:seed:run": "yarn migration-booking-typeorm-seed:cli -- seed"
+    "booking:migration:typeorm:cli": "ts-node -r tsconfig-paths/register -r dotenv/config ./node_modules/typeorm/cli.js -d apps/booking/src/booking-db.datasource.ts",
+    "booking:migration:create": "yarn booking:migration:typeorm:cli -- migration:create",
+    "booking:migration:run": "yarn booking:migration:typeorm:cli -- migration:run",
+    "booking:migration:revert": "yarn booking:migration:typeorm:cli -- migration:revert",
+    "booking:typeorm:seed:cli": "ts-node -r dotenv/config -r tsconfig-paths/register ./node_modules/typeorm-extension/bin/cli.cjs -d apps/booking/src/booking-db.datasource.seed.ts",
+    "premigration-booking:seed:run": "yarn build",
+    "booking:typeorm:seed:run": "yarn booking:typeorm:seed:cli -- seed:run",
+    "prebooking:seed:run": "yarn build",
+    "booking:seed:run": "ts-node -r tsconfig-paths/register -r dotenv/config apps/booking/src/main.seed.ts"
   },
   "dependencies": {
     "@gcoreplus/axios-logger": "^2.0.0",
@@ -50,7 +52,7 @@
     "source-map-support": "^0.5.21",
     "swagger-ui-express": "^5.0.0",
     "typeorm": "^0.3.20",
-    "typeorm-seeding": "^1.6.1",
+    "typeorm-extension": "^3.5.0",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
@@ -64,6 +66,7 @@
     "@types/uuid": "^9.0.8",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",
+    "cross-env": "^7.0.3",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",

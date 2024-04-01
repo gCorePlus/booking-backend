@@ -15,11 +15,11 @@ export class Service extends OperationTypeBaseEntity {
   @Column({ name: 'Description', type: 'text' })
   description: string;
 
-  @Column({ name: 'Time', type: 'text' })
-  time: string;
+  @Column({ name: 'Time', type: 'numeric' })
+  time: number;
 
-  @Column({ name: 'Cost', type: 'numeric' })
-  cost: string;
+  @Column({ name: 'Price', type: 'numeric' })
+  price: string;
 
   @ManyToOne(() => Company, (entity) => entity.services)
   @JoinColumn({ name: 'IdCompany' })

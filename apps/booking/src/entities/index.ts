@@ -1,5 +1,7 @@
 export * from './business-type.entity';
 export * from './company.entity';
+export * from './company-contact.entity';
+export * from './contact-type.entity';
 export * from './employee.entity';
 export * from './login.entity';
 export * from './partner.entity';

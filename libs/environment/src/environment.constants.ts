@@ -4,4 +4,4 @@ export const DEFAULT_LOG_IGNORE = ['/health', '/favicon.ico'];
 
 // DBBooking
 export const POSTGRESQL_BOOKING_CONNECTION = 'BookingConnection';
-export const POSTGRESQL_BOOKING_SCHEMA = process.env.POSTGRESQL_BOOKING_SCHEMA || 'Booking';
+export const POSTGRESQL_BOOKING_SCHEMA = process.env.POSTGRESQL_BOOKING_SCHEMA || 'booking';
