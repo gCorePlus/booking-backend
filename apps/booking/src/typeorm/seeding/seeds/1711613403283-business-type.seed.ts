@@ -12,6 +12,7 @@ export default class BusinessTypeSeed1711613403283 implements Seeder {
 
     const items = await Promise.all(
       Array(20)
+        .fill('')
         .map(() => businessTypeFactory.make()),
     );
     const reduce = items.reduce<BusinessType[]>((acc, curr) => {

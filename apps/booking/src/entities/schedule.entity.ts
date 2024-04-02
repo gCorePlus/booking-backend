@@ -1,7 +1,8 @@
 import { OperationTypeBaseEntity } from '@app/common/entities';
-import { BeforeInsert, Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+import { BeforeInsert, Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany } from 'typeorm';
 import { v4 } from 'uuid';
 import { Employee } from './employee.entity';
+import { Service } from './service.entity';
 import { User } from './user.entity';
 
 @Entity('Schedule')
@@ -11,18 +12,22 @@ export class Schedule extends OperationTypeBaseEntity {
   id: string;
 
   @Column({ name: 'Start', type: 'timestamp' })
-  start: string;
+  start: Date;
 
   @Column({ name: 'End', type: 'timestamp' })
-  end: string;
+  end: Date;
 
   @ManyToOne(() => User, (entity) => entity.schedules)
-  @JoinColumn({ name: 'IdLogin' })
+  @JoinColumn({ name: 'IdUser' })
   user: User;
 
   @ManyToOne(() => Employee, (entity) => entity.schedules)
   @JoinColumn({ name: 'IdEmployee' })
   employee: Employee;
+
+  @ManyToMany(() => Service, (entity) => entity.schedules)
+  @JoinTable({ name: 'ScheduleService', joinColumn: { name: 'IdSchedule' }, inverseJoinColumn: { name: 'IdService' } })
+  services: Service[];
 
   constructor(init?: any) {
     super(init);

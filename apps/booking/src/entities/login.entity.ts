@@ -26,8 +26,7 @@ export class Login extends OperationTypeBaseEntity {
   @OneToOne(() => User, (entity) => entity.login, { cascade: true })
   user: User;
 
-  @OneToMany(() => Employee, (entity) => entity.login)
-  employees: Employee[];
+
 
   constructor(init?: any) {
     super(init);

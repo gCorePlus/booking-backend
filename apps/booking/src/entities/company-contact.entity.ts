@@ -15,7 +15,7 @@ export class CompanyContact extends OperationTypeBaseEntity {
 
   @ManyToOne(() => ContactType, (entity) => entity.companyContacts)
   @JoinColumn({ name: 'IdContactType' })
-  contactType: ContactType;
+  type: ContactType;
 
   @ManyToOne(() => Company, (entity) => entity.contacts)
   @JoinColumn({ name: 'IdCompany' })

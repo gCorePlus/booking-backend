@@ -1,7 +1,8 @@
 import { OperationTypeBaseEntity } from '@app/common/entities';
-import { BeforeInsert, Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+import { BeforeInsert, Column, Entity, JoinColumn, ManyToMany, ManyToOne } from 'typeorm';
 import { v4 } from 'uuid';
 import { Company } from './company.entity';
+import { Schedule } from './schedule.entity';
 
 @Entity('Service')
 export class Service extends OperationTypeBaseEntity {
@@ -24,6 +25,9 @@ export class Service extends OperationTypeBaseEntity {
   @ManyToOne(() => Company, (entity) => entity.services)
   @JoinColumn({ name: 'IdCompany' })
   company: Company;
+
+  @ManyToMany(() => Schedule, (entity) => entity.services)
+  schedules: Schedule[];
 
   constructor(init?: any) {
     super(init);

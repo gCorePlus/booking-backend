@@ -12,7 +12,7 @@ export default class LoginSeed1711908598254 implements Seeder {
     const partnerFactory = factoryManager.get(Partner);
 
     const logins = await Promise.all(
-      Array(1)
+      Array(10)
         .fill('')
         .map(async () => {
           const random = faker.number.int({ min: 0, max: 1 });
@@ -26,6 +26,5 @@ export default class LoginSeed1711908598254 implements Seeder {
     );
 
     await loginRepository.save(logins);
-    // faker.helpers.arrayElement;
   }
 }

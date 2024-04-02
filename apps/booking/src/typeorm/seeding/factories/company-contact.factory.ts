@@ -1,15 +1,14 @@
 import { setSeederFactory } from 'typeorm-extension';
 import { CompanyContact } from '../../../entities';
+import { ContactTypeEnum } from '../../../entities/enums';
 
-export default setSeederFactory(CompanyContact, (faker, meta) => {
-  const random = faker.number.int({ min: 0, max: 1 });
-
+export default setSeederFactory(CompanyContact, (faker, meta?: Pick<CompanyContact, 'type'>) => {
   const entity = new CompanyContact();
 
   entity.id = faker.string.uuid();
 
-  if (random === 0) entity.value = faker.phone.number();
-  if (random === 1) entity.value = faker.internet.email();
+  if ([ContactTypeEnum.EMAIL].includes(meta.type?.name as ContactTypeEnum)) entity.value = faker.internet.email();
+  if ([ContactTypeEnum.PHONE, ContactTypeEnum.WHATSAPP].includes(meta.type?.name as ContactTypeEnum)) entity.value = faker.phone.number();
 
   return entity;
 });

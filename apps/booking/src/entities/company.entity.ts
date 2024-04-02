@@ -21,11 +21,11 @@ export class Company extends OperationTypeBaseEntity {
   @JoinColumn({ name: 'IdBusinessType' })
   businessType: BusinessType;
 
-  @OneToMany(() => Service, (entity) => entity.company)
-  services: Service;
+  @OneToMany(() => Service, (entity) => entity.company, { cascade: true })
+  services: Service[];
 
-  @OneToMany(() => Employee, (entity) => entity.company)
-  employees: Employee;
+  @OneToMany(() => Employee, (entity) => entity.company, { cascade: true })
+  employees: Employee[];
 
   @OneToMany(() => CompanyContact, (entity) => entity.company, { cascade: true })
   contacts: CompanyContact[];

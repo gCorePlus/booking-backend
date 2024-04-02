@@ -24,7 +24,7 @@
     "booking:migration:run": "yarn booking:migration:typeorm:cli -- migration:run",
     "booking:migration:revert": "yarn booking:migration:typeorm:cli -- migration:revert",
     "booking:typeorm:seed:cli": "ts-node -r dotenv/config -r tsconfig-paths/register ./node_modules/typeorm-extension/bin/cli.cjs -d apps/booking/src/booking-db.datasource.seed.ts",
-    "premigration-booking:seed:run": "yarn build",
+    "prebooking:typeorm:seed:run": "yarn build",
     "booking:typeorm:seed:run": "yarn booking:typeorm:seed:cli -- seed:run",
     "prebooking:seed:run": "yarn build",
     "booking:seed:run": "ts-node -r tsconfig-paths/register -r dotenv/config apps/booking/src/main.seed.ts"

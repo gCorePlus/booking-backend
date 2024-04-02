@@ -3,6 +3,7 @@ import { BeforeInsert, Column, Entity, JoinColumn, ManyToOne, OneToMany } from '
 import { v4 } from 'uuid';
 import { Company } from './company.entity';
 import { Login } from './login.entity';
+import { Partner } from './partner.entity';
 import { Schedule } from './schedule.entity';
 
 @Entity('Employee')
@@ -14,9 +15,9 @@ export class Employee extends OperationTypeBaseEntity {
   @Column({ name: 'Name', type: 'text' })
   name: string;
 
-  @ManyToOne(() => Login, (entity) => entity.employees)
-  @JoinColumn({ name: 'IdLogin' })
-  login: Login;
+  @ManyToOne(() => Partner, (entity) => entity.employees)
+  @JoinColumn({ name: 'IdPartner' })
+  partner: Partner;
 
   @ManyToOne(() => Company, (entity) => entity.employees)
   @JoinColumn({ name: 'IdCompany' })
