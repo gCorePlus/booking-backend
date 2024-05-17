@@ -1,5 +1,5 @@
 import * as express from 'express';
-import { bootstrap } from '@app/common/bootstrap';
+import { bootstrap } from '@app/common';
 import { AppModule } from './app.module';
 
 const server = express();

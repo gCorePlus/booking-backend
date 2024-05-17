@@ -4,6 +4,7 @@ export class Environment {
   LOG_REDACT: string[];
   LOG_IGNORE: string[];
 
-  POSTGRESQL_BOOKING_URL: string;
-  POSTGRESQL_BOOKING_SCHEMA: string;
+  POSTGRESQL_URL: string;
+  POSTGRESQL_SCHEMA: string;
+  POSTGRESQL_LOGGER: 'advanced-console' | 'simple-console' | 'file' | 'debug';
 }

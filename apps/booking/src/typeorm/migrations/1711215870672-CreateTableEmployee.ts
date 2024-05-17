@@ -1,4 +1,4 @@
-import { MigrationUtils } from '@app/common/migrations/migration.utils';
+import { MigrationUtils } from '@app/common';
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 import { COMMON_DATE_COLUMNS } from './commons';
 

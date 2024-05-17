@@ -1,4 +1,4 @@
-import { POSTGRESQL_BOOKING_CONNECTION } from '@app/environment';
+import { POSTGRESQL_CONNECTION } from '@app/environment';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CrudRequest } from '@nestjsx/crud';
@@ -9,7 +9,7 @@ import { Partner } from '../entities';
 export class PartnerService extends TypeOrmCrudService<Partner> {
 
   constructor(
-    @InjectRepository(Partner, POSTGRESQL_BOOKING_CONNECTION) protected repo
+    @InjectRepository(Partner, POSTGRESQL_CONNECTION) protected repo
   ) {
     super(repo);
   }

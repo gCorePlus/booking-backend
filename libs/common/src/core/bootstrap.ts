@@ -17,14 +17,12 @@ export const bootstrap = async (module, adapter?: any, options?: any) => {
   // Swagger
   if (!isProduction() || isSwaggerEnabled()) {
     const config = new DocumentBuilder()
-      .setTitle('Booking-API')
-      .addBearerAuth()
-    ;
+      .setTitle('API')
+      .addBearerAuth();
 
     // Swagger Servers
     getSwaggerServers()
-      .forEach((url) => config.addServer(url))
-    ;
+      .forEach((url) => config.addServer(url));
 
     config.setVersion('1.0.0');
     const document = SwaggerModule.createDocument(app, config.build());

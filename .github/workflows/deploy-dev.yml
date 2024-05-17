@@ -26,4 +26,4 @@ jobs:
         sed -i 's/$MAIN/apps\/app\/apps\/app\/src\/main.google.js/g' dist/package.json
     secrets:
       GCP_SERVICE_ACCOUNT: ${{ secrets.DEV_GCP_SERVICE_ACCOUNT }}
-      GCP_FUNCTION_VARIABLES: ${{ secrets.DEV_GCP_FUNC_BOOKING_VARIABLES }}
+      GCP_FUNCTION_VARIABLES: ${{ secrets.DEV_GCP_FUNC_VARIABLES }}

@@ -1,7 +1,6 @@
-import { OperationTypeBaseEntity } from '@app/common/entities';
-import { BeforeInsert, Column, Entity, OneToMany, OneToOne } from 'typeorm';
+import { OperationTypeBaseEntity } from '@app/common';
+import { BeforeInsert, Column, Entity, OneToOne } from 'typeorm';
 import { v4 } from 'uuid';
-import { Employee } from './employee.entity';
 import { Partner } from './partner.entity';
 import { User } from './user.entity';
 

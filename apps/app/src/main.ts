@@ -1,4 +1,4 @@
-import { bootstrap, NODE_HOST, NODE_PORT } from '@app/common/bootstrap';
+import { bootstrap, NODE_HOST, NODE_PORT } from '@app/common';
 import { AppModule } from './app.module';
 
 bootstrap(AppModule)

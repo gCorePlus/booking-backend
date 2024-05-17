@@ -1,5 +1,5 @@
 import { Global, Module } from '@nestjs/common';
-import { DEFAULT_LOG_IGNORE, DEFAULT_LOG_LEVEL, POSTGRESQL_BOOKING_CONNECTION } from './environment.constants';
+import { DEFAULT_LOG_IGNORE, DEFAULT_LOG_LEVEL, POSTGRESQL_SCHEMA } from './environment.constants';
 import { Environment } from './environment.interface';
 
 @Global()
@@ -13,8 +13,9 @@ import { Environment } from './environment.interface';
         LOG_REDACT: process.env.LOG_REDACT ? process.env.LOG_REDACT.split(',') : [],
         LOG_IGNORE: process.env.LOG_IGNORE ? process.env.LOG_IGNORE.split(',') : DEFAULT_LOG_IGNORE,
 
-        POSTGRESQL_BOOKING_URL: process.env.POSTGRESQL_BOOKING_URL,
-        POSTGRESQL_BOOKING_SCHEMA: process.env.POSTGRESQL_BOOKING_SCHEMA || POSTGRESQL_BOOKING_CONNECTION,
+        POSTGRESQL_URL: process.env.POSTGRESQL_URL,
+        POSTGRESQL_SCHEMA: POSTGRESQL_SCHEMA,
+        POSTGRESQL_LOGGER: process.env.POSTGRESQL_LOGGER as any,
       }),
     },
   ],

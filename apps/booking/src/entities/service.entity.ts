@@ -1,4 +1,4 @@
-import { OperationTypeBaseEntity } from '@app/common/entities';
+import { OperationTypeBaseEntity } from '@app/common';
 import { BeforeInsert, Column, Entity, JoinColumn, ManyToMany, ManyToOne } from 'typeorm';
 import { v4 } from 'uuid';
 import { Company } from './company.entity';
