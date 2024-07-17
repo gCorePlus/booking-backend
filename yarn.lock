@@ -386,10 +386,10 @@
   resolved "https://registry.yarnpkg.com/@faker-js/faker/-/faker-8.4.1.tgz#5d5e8aee8fce48f5e189bf730ebd1f758f491451"
   integrity sha512-XQ3cU+Q8Uqmrbf2e0cIC/QN43sTBSC8KF12u29Mb47tWrt2hAgBXSgpZMj4Ao8Uk0iJcU99QsOCaIL8934obCg==
 
-"@gcoreplus/axios-logger@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@gcoreplus/axios-logger/-/axios-logger-2.0.0.tgz#87197774f3c29ed1b933c2ebd1cf393cc40f32db"
-  integrity sha512-7r8iAR2SGP3c4JnDkjKIegC4806wdAA7dCRUoYl2jAasbqL+A1xepj4cgRqv4bPsAT59Q93ixjWF93ryyg2xcw==
+"@gcoreplus/axios-logger@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@gcoreplus/axios-logger/-/axios-logger-2.0.1.tgz#e4ea707e4ea8f0b338d750736d276f4bad9be36c"
+  integrity sha512-7VISz5Iz/hJV2O9tScMwNAEpsbekbF/NAMQmtB6/VKIYeDo9PydUHWADRVdFDj5r39i8KnPXpga9W2niFaQvfQ==
   dependencies:
     fast-redact "^3.4.0"
     moment "^2.30.1"
