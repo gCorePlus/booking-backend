@@ -3,13 +3,13 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CrudRequest } from '@nestjsx/crud';
 import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
-import { Schedule } from '../entities';
+import { CompanyContact } from '../entities';
 
 @Injectable()
-export class ScheduleService extends TypeOrmCrudService<Schedule> {
+export class CompanyContactService extends TypeOrmCrudService<CompanyContact> {
 
   constructor(
-    @InjectRepository(Schedule, POSTGRESQL_CONNECTION) protected repo
+    @InjectRepository(CompanyContact, POSTGRESQL_CONNECTION) protected repo
   ) {
     super(repo);
   }

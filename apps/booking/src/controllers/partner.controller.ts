@@ -19,7 +19,7 @@ import { PartnerService } from '../services';
 @ApiTags('Partner')
 @ApiBearerAuth()
 @Controller('partners')
-export class PartnersController {
+export class PartnerController {
 
   constructor(private readonly service: PartnerService) {
   }

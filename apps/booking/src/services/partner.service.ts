@@ -14,8 +14,8 @@ export class PartnerService extends TypeOrmCrudService<Partner> {
     super(repo);
   }
 
-  async deleteOne(crudRequest: CrudRequest) {
-    const myEntity= await this.getOneOrFail(crudRequest);
-    return this.repo.softRemove(myEntity);
+  async deleteOne(request: CrudRequest) {
+    const entity = await this.getOneOrFail(request);
+    return this.repo.softRemove(entity);
   }
 }

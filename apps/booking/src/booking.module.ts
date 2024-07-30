@@ -1,14 +1,11 @@
 import { Environment, EnvironmentModule } from '@app/environment';
 import { Module } from '@nestjs/common';
+import { RouterModule } from '@nestjs/core';
 import { IncomingMessage } from 'http';
 import { LoggerModule } from 'nestjs-pino';
-import { BookingDBModule } from './booking-db.module';
-import { PartnersController, SchedulesController } from './controllers';
-import { PartnerService, ScheduleService } from './services';
+import { BookingAPIModule } from './booking-api.module';
 
 @Module({
-  controllers: [SchedulesController, PartnersController],
-  providers: [ScheduleService, PartnerService],
   imports: [
     // Logger
     LoggerModule.forRootAsync({
@@ -34,8 +31,16 @@ import { PartnerService, ScheduleService } from './services';
       })),
     }),
 
-    // Database
-    BookingDBModule,
+    // Modules
+    BookingAPIModule,
+
+    // Routes
+    RouterModule.register([
+      {
+        path: '/api/v1',
+        module: BookingAPIModule
+      },
+    ]),
   ],
 })
 export class BookingModule {

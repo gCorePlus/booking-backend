@@ -1,12 +1,12 @@
 import { Controller } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Crud } from '@nestjsx/crud';
-import { Schedule } from '../entities';
-import { ScheduleService } from '../services';
+import { CompanyContact } from '../entities';
+import { CompanyContactService } from '../services';
 
 @Crud({
   model: {
-    type: Schedule,
+    type: CompanyContact,
   },
   query: {
     softDelete: true,
@@ -16,12 +16,12 @@ import { ScheduleService } from '../services';
   },
   validation: { transform: true, transformOptions: { excludeExtraneousValues: true } },
 })
-@ApiTags('Schedule')
+@ApiTags('CompanyContact')
 @ApiBearerAuth()
-@Controller('schedules')
-export class SchedulesController {
+@Controller('companies/:idCompany/contacts')
+export class CompanyContactsController {
 
-  constructor(private readonly service: ScheduleService) {
+  constructor(private readonly service: CompanyContactService) {
   }
 
 }

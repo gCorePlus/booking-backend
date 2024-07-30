@@ -4,7 +4,6 @@ import { v4 } from 'uuid';
 import { BusinessType } from './business-type.entity';
 import { CompanyContact } from './company-contact.entity';
 import { Employee } from './employee.entity';
-import { Login } from './login.entity';
 import { Partner } from './partner.entity';
 import { Service } from './service.entity';
 
@@ -17,7 +16,7 @@ export class Company extends OperationTypeBaseEntity {
   @Column({ name: 'Name', type: 'text' })
   name: string;
 
-  @ManyToOne(() => Login, (entity) => entity.user)
+  @ManyToOne(() => BusinessType, (entity) => entity.companies)
   @JoinColumn({ name: 'IdBusinessType' })
   businessType: BusinessType;
 
